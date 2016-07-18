@@ -7,69 +7,84 @@
 <title>data-show</title>
 <!-- Bootstrap -->
 <link href="css/bootstrap.css" rel="stylesheet">
-<link href="css/bootstrap-theme.min.css" rel="stylesheet">
-<!-- Load c3.css -->
-<link href="../css/c3.min.css" rel="stylesheet" type="text/css">
-<!-- Load d3.js and c3.js -->
-<script type="text/javascript" src="../js/d3.min.js" charset="utf-8"></script>
-<script type="text/javascript" src="../js/c3.min.js" charset="utf-8"></script>
+<link href="css/bootstrap-theme.css" rel="stylesheet">
+<style>
+.scroll-wrapper {
+	-webkit-overflow-scrolling: touch;
+	overflow-y: scroll;
+	/* 提示: 请在此处加上需要设置的大小(dimensions)或位置(positioning)信息! */
+}
+
+.scroll-wrapper iframe {
+	/* 你自己指定的样式 */
+	width: 100%;
+	/* scrolling: auto; */
+	frameborder: 0;
+	board: 0;
+}
+
+</style>
 </head>
 <body>
+	<nav class="navbar-default">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<button id="headBtn" type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+					<span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="">系统平台-首页</a>
+			</div>
+			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+				<ul id="ulnavbar" class="nav navbar-nav">
+				</ul>
+			</div>
+		</div>
+	</nav>
+	<div class="scroll-wrapper">
+		<iframe id="webapp" src=""></iframe>
+	</div>
 </body>
-<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="js/jquery.min.js"></script>
-<!-- Include all compiled plugins (below), or include individual files as needed -->
 <script src="js/bootstrap.min.js"></script>
 <script>
 	window.onload = function() {
-		var body = $("body");
-
-		// 导航标题
-		var nav = $('<nav class="navbar-default"></nav>');
-		body.append(nav);
-
-		var div_content = $('<div class="container-fluid"></div>');
-		nav.append(div_content);
-
-		var div_header = $('<div class="navbar-header"></div>');
-		div_content.append(div_header);
-
-		var header_button = $('<button id="headBtn" type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false"><span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span></button>');
-		div_header.append(header_button);
-		var header_a = $('<a class="navbar-brand" href="">系统平台-首页</a>');
-		div_header.append(header_a);
-		// 导航链接
-		var div_link = $('<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">');
-		div_content.append(div_link);
-
-		var link_ul = $('<ul id="ulnavbar" class="nav navbar-nav">');
-		div_link.append(link_ul);
-
-		var link_li_1 = $('<li class="active" onclick="choose(this)"><a href="javascript:setSrc(\'views/shouye.html\')">首页</a></li>');
-		link_ul.append(link_li_1);
-
-		var link_li_2 = $('<li class="" onclick="choose(this)"><a href="javascript:setSrc(\'views/quxian2.html\')">页面2</a></li>');
-		link_ul.append(link_li_2);
-
-		var link_li_3 = $('<li class="choose(this)"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">多个页面<span class="caret"></span></a><ul class="dropdown-menu"><li><a href="#">Action</a></li><li><a href="#">Another action</a></li><li><a href="#">Something else here</a></li><li><a href="#">Separated link</a></li><li><a href="#">One more separated link</a></li></ul></li>');
-		link_ul.append(link_li_3);
-
+		$("#webapp").attr("src", "views/shouye.html");
 		var width = $(window).width();
 		var height = $(window).height();
+
+		var body = $('body');
+
+		var link_ul = $('#ulnavbar');
+
+		var link_li_1 = $('<li id="hBtn1" class="active"><a href="javascript:setSrc(\'views/shouye.html\',\'hBtn1\')">首页</a></li>');
+		link_ul.append(link_li_1);
+
+		var link_li_2 = $('<li id="hBtn2" class=""><a href="javascript:setSrc(\'views/shouye2.html\',\'hBtn2\')">页面2</a></li>');
+		link_ul.append(link_li_2);
+
+		var link_li_3 = $('<li id="hBtn3" class=""><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">多个页面<span class="caret"></span></a><ul class="dropdown-menu"><li><a href="javascript:setSrc(\'views/shouye3.html\',\'hBtn3\')">页面3</a></li><li><a href="#">Another action</a></li><li><a href="#">Something else here</a></li><li><a href="#">Separated link</a></li><li><a href="#">One more separated link</a></li></ul></li>');
+		link_ul.append(link_li_3);
+
+		$("#webapp").css("height", height);
 		// iframe
-		var iframe = $('<iframe id="webapp" src="views/shouye.html" style="width: '+width+'px; height: '+height+'px;" frameborder="0" board="0"> </iframe>');
-		body.append(iframe);
+		/* var iframe = $('<iframe id="webapp" src="views/shouye.html" height="320" width="100%" scrolling="auto" frameborder="0" board="0"> </iframe>');
+		body.append(iframe); */
 	};
 
-	var choose = function(obj) {
+	var choose = function(obj, id) {
 		$("#ulnavbar .active").removeClass();
-		$(obj).addClass("active");
+		$("#" + id).addClass("active");
 		if (!$('#headBtn').hasClass('collapsed')) {
 			$('#headBtn').click();
 		}
 	};
 
-	var setSrc = function(src) {
+	var setSrc = function(src, id) {
+		$("#ulnavbar .active").removeClass();
+		$("#" + id).addClass("active");
+		if (!$('#headBtn').hasClass('collapsed')) {
+			$('#headBtn').click();
+		}
 		if ($("#webapp").attr("src") != src) {
 			$("#webapp").attr("src", src);
 		}

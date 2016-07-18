@@ -5,11 +5,13 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Insert title here</title>
+<link href="../css/handsontable.min.css" rel="stylesheet">
 <link href="../css/bootstrap.css" rel="stylesheet">
 <link href="../css/bootstrap-theme.css" rel="stylesheet">
 <script src="../js/commons.js"></script>
 <script src="../js/jquery.min.js"></script>
 <script src="../js/bootstrap.min.js"></script>
+<script src="../js/handsontable.min.js"></script>
 <script>
 $(document).ready(function() {
 	$.post(data_service + "dataservice/getconfig.do?id=10&today=" + yyyyMMdd() + "&detailskey=today_hour", function(data) {
@@ -27,8 +29,8 @@ $(document).ready(function() {
 			var register_count = values[i].register_count;
 			var deal_count = values[i].deal_count;
 			var deal_amount = values[i].deal_amount;
-			var tr = $('<tr  align="right" class='+cls+'><th scope="row">' + time_name + '</th><td>' + register_count + '</td><td>' + deal_count + '</td><td>'
-					+ deal_amount + '</td></tr>');
+			var tr = $('<tr class='+cls+'><th scope="row">' + time_name + '</th><td>' + register_count + '</td><td>' + deal_count + '</td><td>'
+					+ deal_amount + '</td><td>' + deal_count + '</td><td>' + deal_count + '</td><td>' + deal_count + '</td><td>' + deal_count + '</td><td>' + deal_count + '</td><td>' + deal_count + '</td><td>' + deal_count + '</td><td>' + deal_count + '</td><td>' + deal_count + '</td><td>' + deal_count + '</td></tr>');
 			$("#mytable > tbody").append(tr);
 		}
 	});
@@ -38,11 +40,21 @@ $(document).ready(function() {
 <body>
     <table id="mytable" class="table table-bordered table-striped">
         <thead class="header">
-            <tr style="text-align:right">
-			<th width="15%">小时</th>
-			<th width="25%">注册人数</th>
-			<th width="25%">交易人数</th>
-			<th width="35%">交易额(万元)</th>
+            <tr align=center style="text-align: center">
+			<th width="">小时</th>
+			<th width="">注册人数</th>
+			<th width="">交易人数</th>
+			<th width="">交易额(万元)</th>
+			<th width="">交易额(万元)</th>
+			<th width="">交易额(万元)</th>
+			<th width="">交易额(万元)</th>
+			<th width="">交易额(万元)</th>
+			<th width="">交易额(万元)</th>
+			<th width="">交易额(万元)</th>
+			<th width="">交易额(万元)</th>
+			<th width="">交易额(万元)</th>
+			<th width="">交易额(万元)</th>
+			<th width="">交易额(万元)</th>
             </tr>
         </thead>
         <tbody>
