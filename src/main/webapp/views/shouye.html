@@ -267,7 +267,7 @@
 			var deal_amount = today_hours[i].deal_amount;
 			// 当前的小时
 			if (time_name == $util.HH() && isToday()) {
-				var tr = $(".nowhour");
+				var tr = $("#example tbody .nowhour");
 				if (tr.find(">td").eq(1).find(">span").text() != $util.toFixed2(deal_amount)) {
 					tr.find(">td").eq(1).find(">span").text($util.toFixed2(deal_amount));
 					tr.find(">td").eq(1).find(">span").addClass("blink");
@@ -287,7 +287,7 @@
 
 	/* 取消闪烁效果 */
 	var cancelBlink = function() {
-		var tr = $(".nowhour");
+		var tr = $("#example tbody .nowhour");
 		tr.find(">td").eq(1).find(">span").removeClass("blink");
 		tr.find(">td").eq(2).find(">span").removeClass("blink");
 		tr.find(">td").eq(3).find(">span").removeClass("blink");
@@ -306,7 +306,10 @@
 		if (_HH != $util.HH()) {
 			lock = false;
 			referData();
-			// pass
+			// 已经刷新出来当前小时的数据
+			if ($("#example tbody .nowhour").length == 1) {
+				_HH = $util.HH();
+			}
 		} else {
 			// console.log('referNow---' + new XDate().toString("yyyy-MM-dd HH:mm:ss"));
 			var qeuryString = "";
