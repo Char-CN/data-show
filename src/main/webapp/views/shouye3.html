@@ -5,14 +5,16 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Insert title here</title>
-<link href="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css" rel="stylesheet">
-<link href="https://cdn.datatables.net/fixedcolumns/3.2.2/css/fixedColumns.dataTables.min.css" rel="stylesheet">
 <link href="../css/bootstrap.css" rel="stylesheet">
 <link href="../css/bootstrap-theme.css" rel="stylesheet">
+<link href="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css" rel="stylesheet">
+<!-- <link href="https://cdn.datatables.net/1.10.12/css/dataTables.bootstrap.min.css" rel="stylesheet"> -->
+<link href="https://cdn.datatables.net/fixedcolumns/3.2.2/css/fixedColumns.dataTables.min.css" rel="stylesheet">
 <script src="../js/commons.js"></script>
 <script src="../js/jquery.min.js"></script>
 <script src="../js/bootstrap.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
+<!-- <script src="https://cdn.datatables.net/1.10.12/js/dataTables.bootstrap.min.js"></script> -->
 <script src="https://cdn.datatables.net/fixedcolumns/3.2.2/js/dataTables.fixedColumns.min.js"></script>
 <style>
 th, td {
@@ -20,28 +22,41 @@ th, td {
 }
 
 div.dataTables_wrapper {
-	width: 320px;
 	margin: 0 auto;
 }
 
-@media screen and (max-width: 340px) {
+@media screen and (max-width: 320px) {
 	div.dataTables_wrapper {
-		width: 340px;
+		width: 320px;
 		margin: 0 auto;
 	}
 }
-
-@media screen and (min-width: 1200px) {
-	div.dataTables_wrapper {
-		width: 800px;
-		margin: 0 auto;
-	}
-}
-
 </style>
+<script>
+	$(document).ready(function() {
+		var width = $(window).width();
+		var height = $(window).height();
+		var table = $('#example').DataTable({
+			scrollY : height,
+			scrollX : true,
+			scrollCollapse : true,
+			scroller : true,
+			paging : false,
+			"searching" : false,
+			info : false,
+			fixedColumns : {
+				leftColumns : 1
+			}
+		});
+		//alert($('#example').width());
+		width = width > $('#example').width() ? $('#example').width() : width;
+		//alert(width);
+		$("div.dataTables_wrapper").width(width);
+	});
+</script>
 </head>
 <body>
-	<table id="example" class="stripe row-border order-column" cellspacing="0" width="100%">
+	<table id="example" class="stripe row-border order-column">
 		<thead>
 			<tr>
 				<th>First name</th>
@@ -63,7 +78,7 @@ div.dataTables_wrapper {
 				<td>Edinburgh</td>
 				<td>61</td>
 				<td>2011/04/25</td>
-				<td>$320,800</td>
+				<td>320800</td>
 				<td>5421</td>
 				<td>t.nixon@datatables.net</td>
 			</tr>
@@ -685,18 +700,5 @@ div.dataTables_wrapper {
 			</tr>
 		</tbody>
 	</table>
-	<script>
-		$(document).ready(function() {
-			var table = $('#example').DataTable({
-				scrollY : "300px",
-				scrollX : true,
-				scrollCollapse : true,
-				paging : false,
-				fixedColumns : {
-					leftColumns : 1
-				}
-			});
-		});
-	</script>
 </body>
 </html>

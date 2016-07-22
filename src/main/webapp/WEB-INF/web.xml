@@ -7,4 +7,13 @@
 		<welcome-file>index.html</welcome-file>
 	</welcome-file-list>
 
+	<servlet>
+		<servlet-name>DataServiceProxy</servlet-name>
+		<servlet-class>org.blazer.service.proxy.DataServiceProxy</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>DataServiceProxy</servlet-name>
+		<url-pattern>/dataservice/getconfig.do</url-pattern>
+	</servlet-mapping>
+
 </web-app>

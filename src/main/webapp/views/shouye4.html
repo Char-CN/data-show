@@ -8,81 +8,138 @@
 <link href="../css/commons.css" rel="stylesheet">
 <link href="../css/font-awesome.css" rel="stylesheet">
 <link href="../css/bootstrap.css" rel="stylesheet">
+<!-- 
+<link href="../css/bootstrap-theme.css" rel="stylesheet">
+ -->
 <link href="../css/jquery.dataTables.min.css" rel="stylesheet">
+<!-- 
+<link href="../css/fixedColumns.dataTables.min.css" rel="stylesheet">
+ -->
 <link href="../css/mobiscroll.custom-2.17.2.min.css" rel="stylesheet">
+<!-- 
+<script src="../js/bootstrap.min.js"></script>
+ -->
+<!-- 
+<script src="../js/dataTables.fixedColumns.min.js"></script>
+ -->
+<!-- 
+<link href="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css" rel="stylesheet">
+<link href="https://cdn.datatables.net/fixedcolumns/3.2.2/css/fixedColumns.dataTables.min.css" rel="stylesheet">
+ -->
+<!-- 
+<script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/fixedcolumns/3.2.2/js/dataTables.fixedColumns.min.js"></script>
+ -->
+<style>
+th, td {
+	white-space: nowrap;
+	text-align: right;
+}
+
+div.dataTables_wrapper {
+	margin: 0 auto;
+}
+
+div.top_container {
+	width: 100%;
+	display: table
+}
+
+div.top_left, div.top_mid, div.top_right {
+	display: table-cell;
+}
+
+div.top_mid {
+	width: 100%;
+}
+
+div.top_left, div.top_right {
+	padding-left: 15px;
+	padding-right: 15px;
+	white-space: nowrap;
+}
+</style>
 <script src="../js/commons.js"></script>
 <script src="../js/jquery.min.js"></script>
 <script src="../js/jquery.dataTables.min.js"></script>
 <script src="../js/mobiscroll.custom-2.17.2.min.js"></script>
 <script src="../js/xdate.dev.js"></script>
 <script>
-	// 日期最小值于最大值
-	var minDate = new Date(2016, 2, 15);
-	var maxDate = new Date();
-	// 页面宽与高
 	var width = $(window).width();
 	var height = $(window).height();
-	// 表格
 	var table;
-	// 全局ajax锁
 	var lock = false;
 	window.onload = function() {
-		// 设置日期控件
+		//width = width > $('#example').width() ? $('#example').width() : width;
+		//var thead = $('<tr><th>小时</th><th>注册人数</th><th>交易人数</th><th>交易额(万元)</th><th>交易额2(万元)</th><th>交易额3(万元)</th><th>交易额4(万元)</th><th>交易额5(万元)</th><th>交易额6(万元)</th><th>交易额7(万元)</th><th>交易额8(万元)</th><th>交易额9(万元)</th><th>交易额11(万元)</th><th>交易额11(万元)</th></tr>');
+		//$("#example>thead").append(thead);
+		//$("#example").width(width);
 		$('#datepicker').mobiscroll().date({
 			theme : 'mobiscroll',
 			lang : 'zh',
 			display : 'bottom',
-			minDate : minDate,
-			maxDate : maxDate
+			minDate : new Date(2016, 2, 15),
+			maxDate : new Date()
 		});
-		// 设置日期默认提示语
 		$('#datepicker').attr('placeholder', $util.yyyy_MM_dd() + ' (请点击此处选择日期)');
-		// 日期选择change事件
 		$("#datepicker").change(function() {
+			/*var date_value = $(this).va l();
+			var y = date_value.substr(0, 4);
+			var m = parseInt(date_value.substr(5, 2)) - 1;
+			var d = date_value.substr(8, 2) ;*/
+			//referData(new Date(y, m, d));
 			referData();
 		});
-		// 日期前一日的选择按钮click事件
 		$("div.top_left").click(function() {
 			var date_value = $("#datepicker").val() != "" ? $("#datepicker").val() : $util.yyyy_MM_dd();
-			if (!checkChooseLeftDate()) {
+			if (date_value == "2016-03-15") {
 				return;
 			}
 			$("#datepicker").val(new XDate(date_value).addDays(-1).toString("yyyy-MM-dd"));
 			$("#datepicker").change();
 		});
-		// 日期后一日的选择按钮click事件
 		$("div.top_right").click(function() {
 			var date_value = $("#datepicker").val() != "" ? $("#datepicker").val() : $util.yyyy_MM_dd();
-			if (!checkChooseRightDate()) {
+			if (date_value == $util.yyyy_MM_dd()) {
 				return;
 			}
 			$("#datepicker").val(new XDate(date_value).addDays(1).toString("yyyy-MM-dd"));
 			$("#datepicker").change();
 		});
-		// 表格
-		table = $('#example').DataTable();
-		// 刷新数据
+		//width = width > $('#example').width() ? $('#example').width() : width;
+		//$("#example").width(width);
+		//$("div.dataTables_wrapper").width(width);
+		table = $('#example').DataTable({});
 		referData();
 	};
 
-	var checkChooseLeftDate = function() {
-		var date_value = $("#datepicker").val() != "" ? $("#datepicker").val() : $util.yyyy_MM_dd();
-		if (new XDate(minDate).toString("yyyy-MM-dd") == new XDate(date_value).toString("yyyy-MM-dd")) {
-			$("div.top_left").css("color", "#CCCCCC");
-			return false;
-		}
-		$("div.top_left").css("color", "");
-		return true;
-	};
-
-	var checkChooseRightDate = function() {
-		var date_value = $("#datepicker").val() != "" ? $("#datepicker").val() : $util.yyyy_MM_dd();
-		if (new XDate(maxDate).toString("yyyy-MM-dd") == new XDate(date_value).toString("yyyy-MM-dd")) {
-			$("div.top_right").css("color", "#CCCCCC");
-			return false;
-		}
-		$("div.top_right").css("color", "");
-		return true;
+	var referTable = function() {
+		// table.destroy();
+		// 绑定table
+		table = $('#example').DataTable({
+			destroy : true,
+			bAutoWidth : true,
+			scrollY : height - 80,
+			scrollX : true,
+			scrollCollapse : true,
+			scroller : true,
+			paging : false,
+			"searching" : false,
+			info : false,
+			fixedColumns : {
+				leftColumns : 1
+			},
+			"order" : [ [ 0, "desc" ] ],
+			"aoColumns" : [ {
+				"orderSequence" : [ "desc", "asc" ]
+			}, {
+				"orderSequence" : [ "desc", "asc" ]
+			}, {
+				"orderSequence" : [ "desc", "asc" ]
+			}, {
+				"orderSequence" : [ "desc", "asc" ]
+			} ]
+		});
 	};
 
 	var isToday = function() {
@@ -90,12 +147,19 @@
 	};
 
 	var referData = function() {
-		checkChooseLeftDate();
-		checkChooseRightDate();
 		if (lock) {
 			return;
 		}
 		lock = true;
+		/* 
+		var today = $util.yyyyMMdd();
+		var currentDate = t1;
+		var current = $util.yyyyMMdd(currentDate);
+		var current_yesterday_milliseconds = currentDate.getTime() - 1000 * 60 * 60 * 24;
+		var current_yesterdayDate = t1;
+		current_yesterdayDate.setTime(current_yesterday_milliseconds);
+		var current_yesterday = $util.yyyyMMdd(current_yesterdayDate);
+		 */
 		t1 = "";
 		if ($("#datepicker").val() == "") {
 			t1 = new XDate().toString("yyyy-MM-dd");
@@ -107,13 +171,14 @@
 		qeuryString += "&today=" + new XDate(t1).toString("yyyyMMdd");
 		qeuryString += "&yesterday=" + new XDate(t1).addDays(-1).toString("yyyyMMdd");
 		qeuryString += "&yesterday2=" + new XDate(t1).addDays(-2).toString("yyyyMMdd");
+		//var datable=$('#example').dataTable();
 		$.ajax({
 			type : "get",
 			url : $util.data_service_getconfig + qeuryString,
 			dataType : "json",
 			timeout : 500,
 			success : function(data) {
-				referTable(data);
+				loadData(data);
 				lock = false;
 			},
 			error : function(e) {
@@ -122,7 +187,7 @@
 					url : $util.data_service_getconfig_bak + qeuryString,
 					dataType : "json",
 					success : function(data2) {
-						referTable(data2);
+						loadData(data2);
 						lock = false;
 					},
 					error : function(e2) {
@@ -133,8 +198,7 @@
 		});
 	};
 
-	var referTable = function(data) {
-		// 清空表格与数据
+	var loadData = function(data) {
 		table.destroy();
 		var tbody = $("#example>tbody");
 		tbody.html("");
@@ -165,17 +229,19 @@
 			var deal_amount_class = deal_amount_y <= deal_amount ? "red" : "green";
 
 			// 当前的小时
-			if (time_name == $util.HH() && isToday()) {
+			if ("" + time_name == "" + $util.HH() && isToday()) {
 				var tr = '<tr class="nowhour">';
 				tr += '<td class="gray">' + time_name + '</td>';
-				tr += '<td class="shine"><span>' + $util.toFixed2(deal_amount) + '</span><i class="fa fa-circle-o-notch fa-pulse fa-1x fa-fw"></i></td>';
-				tr += '<td class="shine"><span>' + $util.toFixed0(deal_count) + '</span><i class="fa fa-circle-o-notch fa-pulse fa-1x fa-fw"></i></td>';
-				tr += '<td class="shine"><span>' + $util.toFixed0(register_count) + '</span><i class="fa fa-circle-o-notch fa-pulse fa-1x fa-fw"></i></td>';
+				tr += '<td class="shine"><span class="">' + $util.toFixed2(deal_amount) + '</span><i class="fa fa-circle-o-notch fa-pulse fa-1x fa-fw"></i></td>';
+				tr += '<td class="shine"><span class="">' + $util.toFixed0(deal_count) + '</span><i class="fa fa-circle-o-notch fa-pulse fa-1x fa-fw"></i></td>';
+				tr += '<td class="shine"><span class="">' + $util.toFixed0(register_count) + '</span><i class="fa fa-circle-o-notch fa-pulse fa-1x fa-fw"></i></td>';
 				tr += '</tr>';
 				tbody.append($(tr));
 				continue;
 			}
 			// 不是当前小时
+			/* var up = '&nbsp;↑';
+			var down = '&nbsp;↓'; */
 			var up = '    <i class="fa fa-arrow-up" aria-hidden="true"></i>';
 			var down = '    <i class="fa fa-arrow-down" aria-hidden="true"></i>';
 			deal_amount = $util.toFixed2(deal_amount) + (deal_amount_y <= deal_amount ? up : down);
@@ -254,9 +320,24 @@
 				"orderSequence" : [ "desc", "asc" ]
 			} ]
 		});
+		/* table.DataTable({
+			bDestroy : true,
+			bAutoWidth : true
+		}); */
+		/* alert(width);
+		//width = width > $('#example').width() ? $('#example').width() : width;
+		alert(width);
+		$("#example").width(width);
+		$("div.dataTables_wrapper").width(width); */
+		//$("#example").width("100%");
+		//table.fnAdjustColumnSizing(false);
+		//$("#example_wrapper").width("100%");
+		//$("div .dataTables_wrapper").width("100%");
+		//$("div .dataTables_scrollHeadInner").width("100%");
+		//$("div .dataTables_scrollHeadInner > .stripe").width("100%");
+		//table.fnDraw();
 	};
 
-	/* 刷新当前小时的数据 */
 	var referData2NowHHTD = function(data) {
 		var rst = eval(data);
 		var today_hours = rst.details.today_hour.values;
@@ -266,7 +347,7 @@
 			var deal_count = today_hours[i].deal_count;
 			var deal_amount = today_hours[i].deal_amount;
 			// 当前的小时
-			if (time_name == $util.HH() && isToday()) {
+			if ("" + time_name == "" + $util.HH() && isToday()) {
 				var tr = $(".nowhour");
 				if (tr.find(">td").eq(1).find(">span").text() != $util.toFixed2(deal_amount)) {
 					tr.find(">td").eq(1).find(">span").text($util.toFixed2(deal_amount));
@@ -285,16 +366,10 @@
 		}
 	};
 
-	/* 取消闪烁效果 */
 	var cancelBlink = function() {
-		var tr = $(".nowhour");
-		tr.find(">td").eq(1).find(">span").removeClass("blink");
-		tr.find(">td").eq(2).find(">span").removeClass("blink");
-		tr.find(">td").eq(3).find(">span").removeClass("blink");
+		var tr = $(".nowhour .blink").removeClass("blink");
 	};
 
-	/* 实时刷新 */
-	setInterval('referNow()', 5000);
 	var _HH = $util.HH();
 	var referNow = function() {
 		// 如果没有当前小时的标签
@@ -304,8 +379,6 @@
 		lock = true;
 		// 过了当前小时
 		if (_HH != $util.HH()) {
-			lock = false;
-			referData();
 			// pass
 		} else {
 			// console.log('referNow---' + new XDate().toString("yyyy-MM-dd HH:mm:ss"));
@@ -339,19 +412,20 @@
 			});
 		}
 	};
+	setInterval('referNow()', 5000);
 </script>
 </head>
 <body style="overflow-x: hidden">
 	<!-- <span>选择日期：</span> -->
 	<div class="top_container">
-		<div class="top_left" style="cursor:pointer;">
-			<i class="fa fa-hand-o-left" aria-hidden="true"></i>
+		<div class="top_left">
+			<span class="glyphicon glyphicon-hand-left" aria-hidden="true"></span>
 		</div>
 		<div class="top_mid">
 			<input id="datepicker" style="height: 30px; width: 100%;" class="mbsc-comp" readonly type="text">
 		</div>
-		<div class="top_right" style="cursor:pointer;">
-			<i class="fa fa-hand-o-right" aria-hidden="true"></i>
+		<div class="top_right">
+			<span class="glyphicon glyphicon-hand-right" aria-hidden="true"></span>
 		</div>
 	</div>
 	<table id="example" class="stripe row-border order-column">
