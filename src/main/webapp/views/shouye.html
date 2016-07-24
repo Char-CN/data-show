@@ -6,15 +6,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Insert title here</title>
 <link href="../css/commons.css" rel="stylesheet">
-<link href="../css/font-awesome.css" rel="stylesheet">
-<link href="../css/bootstrap.css" rel="stylesheet">
+<link href="../css/font-awesome.min.css" rel="stylesheet">
+<link href="../css/bootstrap.min.css" rel="stylesheet">
 <link href="../css/jquery.dataTables.min.css" rel="stylesheet">
 <link href="../css/mobiscroll.custom-2.17.2.min.css" rel="stylesheet">
 <script src="../js/commons.js"></script>
 <script src="../js/jquery.min.js"></script>
 <script src="../js/jquery.dataTables.min.js"></script>
 <script src="../js/mobiscroll.custom-2.17.2.min.js"></script>
-<script src="../js/xdate.dev.js"></script>
+<script src="../js/xdate.dev.min.js"></script>
 <script>
 	// 日期最小值于最大值
 	var minDate = new Date(2016, 2, 15);
@@ -26,6 +26,9 @@
 	var table;
 	// 全局ajax锁
 	var lock = false;
+	window.onorientationchange = function(){
+// 		window.location.reload(true);
+	};
 	window.onload = function() {
 		// 设置日期控件
 		$('#datepicker').mobiscroll().date({
@@ -44,7 +47,7 @@
 		// 日期前一日的选择按钮click事件
 		$("div.top_left").click(function() {
 			var date_value = $("#datepicker").val() != "" ? $("#datepicker").val() : $util.yyyy_MM_dd();
-			if (!checkChooseLeftDate()) {
+			if (lock || !checkChooseLeftDate()) {
 				return;
 			}
 			$("#datepicker").val(new XDate(date_value).addDays(-1).toString("yyyy-MM-dd"));
@@ -53,14 +56,14 @@
 		// 日期后一日的选择按钮click事件
 		$("div.top_right").click(function() {
 			var date_value = $("#datepicker").val() != "" ? $("#datepicker").val() : $util.yyyy_MM_dd();
-			if (!checkChooseRightDate()) {
+			if (lock || !checkChooseRightDate()) {
 				return;
 			}
 			$("#datepicker").val(new XDate(date_value).addDays(1).toString("yyyy-MM-dd"));
 			$("#datepicker").change();
 		});
 		// 表格
-		table = $('#example').DataTable();
+		// table = $('#example').DataTable();
 		// 刷新数据
 		referData();
 	};
@@ -135,9 +138,11 @@
 
 	var referTable = function(data) {
 		// 清空表格与数据
-		table.destroy();
 		var tbody = $("#example>tbody");
-		tbody.html("");
+		if ($.fn.dataTable.isDataTable('#example')) {
+			table.destroy();
+			tbody.html("");
+		}
 		var rst = eval(data);
 		var values = rst.details.today_hour.values;
 		var yesterday_values = rst.details.yesterday_hour.values;
@@ -173,6 +178,8 @@
 				tr += '<td class="shine"><span>' + $util.toFixed0(register_count) + '</span><i class="fa fa-circle-o-notch fa-pulse fa-1x fa-fw"></i></td>';
 				tr += '</tr>';
 				tbody.append($(tr));
+				// 整点时候
+				_HH = $util.HH()
 				continue;
 			}
 			// 不是当前小时
@@ -267,6 +274,7 @@
 			var deal_amount = today_hours[i].deal_amount;
 			// 当前的小时
 			if (time_name == $util.HH() && isToday()) {
+				// 增加闪烁效果
 				var tr = $("#example tbody .nowhour");
 				if (tr.find(">td").eq(1).find(">span").text() != $util.toFixed2(deal_amount)) {
 					tr.find(">td").eq(1).find(">span").text($util.toFixed2(deal_amount));
@@ -304,12 +312,10 @@
 		lock = true;
 		// 过了当前小时
 		if (_HH != $util.HH()) {
+			// 先删除需要闪烁的行样式
+			$("#example tbody .nowhour").removeClass("nowhour");
 			lock = false;
 			referData();
-			// 已经刷新出来当前小时的数据
-			if ($("#example tbody .nowhour").length == 1) {
-				_HH = $util.HH();
-			}
 		} else {
 			// console.log('referNow---' + new XDate().toString("yyyy-MM-dd HH:mm:ss"));
 			var qeuryString = "";
@@ -344,7 +350,7 @@
 	};
 </script>
 </head>
-<body style="overflow-x: hidden">
+<body style="overflow:hidden">
 	<!-- <span>选择日期：</span> -->
 	<div class="top_container">
 		<div class="top_left" style="cursor:pointer;">

@@ -3,18 +3,26 @@
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+<!-- <meta name="viewport" content="width=device-width, initial-scale=1"> -->
+
 <title>恒大报表系统</title>
 <!-- Bootstrap -->
-<link href="css/bootstrap.css" rel="stylesheet">
-<link href="css/bootstrap-theme.css" rel="stylesheet">
+<link href="css/bootstrap.min.css" rel="stylesheet">
+<link href="css/bootstrap-theme.min.css" rel="stylesheet">
 <script src="js/jquery.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
 <script>
+	var orientationChange = function() {
+// 		alert("orientationChange" + $(window).width());
+		window.location.reload(true);
+		alert("您已调整屏幕，系统需要重新调整页面。");
+	};
+	window.addEventListener("onorientationchange" in window ? "orientationchange" : "resize", orientationChange, false);
 	window.onload = function() {
+// 		alert("onload" + $(window).width());
 		var width = $(window).width();
 		var height = $(window).height();
-		$("#webapp").attr("src", "views/shouye.html");
 		var body = $('body');
 
 		var link_ul = $('#ulnavbar');
@@ -34,6 +42,7 @@
 		// iframe
 		/* var iframe = $('<iframe id="webapp" src="views/shouye.html" height="320" width="100%" scrolling="auto" frameborder="0" board="0"> </iframe>');
 		body.append(iframe); */
+		$("#webapp").attr("src", "views/shouye.html");
 	};
 
 	var choose = function(obj, id) {
@@ -57,7 +66,7 @@
 	};
 </script>
 </head>
-<body style="overflow-x:hidden">
+<body style="overflow:hidden">
 	<nav class="navbar-default">
 		<div class="container-fluid">
 			<div class="navbar-header">
