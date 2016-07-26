@@ -9,7 +9,7 @@
 
 	<servlet>
 		<servlet-name>DataServiceProxy</servlet-name>
-		<servlet-class>org.blazer.service.proxy.DataServiceProxy</servlet-class>
+		<servlet-class>org.blazer.datashow.proxy.DataServiceProxy</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>DataServiceProxy</servlet-name>

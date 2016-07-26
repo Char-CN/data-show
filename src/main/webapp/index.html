@@ -8,19 +8,17 @@
 
 <title>恒大报表系统</title>
 <!-- Bootstrap -->
-<link href="css/bootstrap.min.css" rel="stylesheet">
-<link href="css/bootstrap-theme.min.css" rel="stylesheet">
+<link href="css/bootstrap.css" rel="stylesheet">
+<link href="css/bootstrap-theme.css" rel="stylesheet">
 <script src="js/jquery.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
 <script>
 	var orientationChange = function() {
-// 		alert("orientationChange" + $(window).width());
 		window.location.reload(true);
 		alert("您已调整屏幕，系统需要重新调整页面。");
 	};
 	window.addEventListener("onorientationchange" in window ? "orientationchange" : "resize", orientationChange, false);
 	window.onload = function() {
-// 		alert("onload" + $(window).width());
 		var width = $(window).width();
 		var height = $(window).height();
 		var body = $('body');
@@ -33,15 +31,11 @@
 		var link_li_2 = $('<li id="hBtn2" class=""><a href="javascript:setSrc(\'views/shouye2.html\',\'hBtn2\')">页面2</a></li>');
 		link_ul.append(link_li_2);
 
-		var link_li_3 = $('<li id="hBtn3" class=""><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">多个页面<span class="caret"></span></a><ul class="dropdown-menu"><li><a href="javascript:setSrc(\'views/shouye3.html\',\'hBtn3\')">页面3</a></li><li><a href="javascript:setSrc(\'views/shouye4.html\',\'hBtn3\')">页面4</a></li><li><a href="#">Something else here</a></li><li><a href="#">Separated link</a></li><li><a href="#">One more separated link</a></li></ul></li>');
+		var link_li_3 = $('<li id="hBtn3" class=""><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">多个页面<span class="caret"></span></a><ul class="dropdown-menu"><li><a href="javascript:setSrc(\'views/shouye3.html\',\'hBtn3\')">页面3</a></li><li><a href="javascript:setSrc(\'views/shouye4.html\',\'hBtn3\')">页面4</a></li></ul></li>');
 		link_ul.append(link_li_3);
 
 		$("#webapp").css("height", height - 50);
 		$("#webapp").css("width", width);
-		//iFrameResize({log:true,enablePublicMethods:true})
-		// iframe
-		/* var iframe = $('<iframe id="webapp" src="views/shouye.html" height="320" width="100%" scrolling="auto" frameborder="0" board="0"> </iframe>');
-		body.append(iframe); */
 		$("#webapp").attr("src", "views/shouye.html");
 	};
 
@@ -62,12 +56,11 @@
 		if ($("#webapp").attr("src") != src) {
 			$("#webapp").attr("src", src);
 		}
-		//alert($("#webapp").width());
 	};
 </script>
 </head>
-<body style="overflow:hidden">
-	<nav class="navbar-default">
+<body style="/* overflow:hidden */">
+	<nav class="navbar-custom">
 		<div class="container-fluid">
 			<div class="navbar-header">
 				<button id="headBtn" type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
@@ -81,6 +74,6 @@
 			</div>
 		</div>
 	</nav>
-	<iframe id="webapp" src="" width="100%" scrolling="no" style="overflow:none;border:0px;frameborder:0;"></iframe>
+	<iframe id="webapp" src="" scrolling="no" style="border:0px;/* border-left:1px solid;border-right:1px solid; */frameborder:0;"></iframe>
 </body>
 </html>

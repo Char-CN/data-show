@@ -78,6 +78,11 @@ div.top_left, div.top_right {
 			theme : 'mobiscroll',
 			lang : 'zh',
 			display : 'bottom',
+			headerText: function (valueText) { //自定义弹出框头部格式  
+	            array = valueText.split('-');  
+	            return "<span >" + array[0] + "年" + array[1] + "月" + array[2] + "日" + "</span>";  
+	        },
+			dateFormat : 'yy-mm-dd',
 			minDate : new Date(2016, 2, 15),
 			maxDate : new Date()
 		});

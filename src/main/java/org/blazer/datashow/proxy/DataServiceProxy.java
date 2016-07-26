@@ -1,14 +1,18 @@
-package org.blazer.service.proxy;
+package org.blazer.datashow.proxy;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import org.blazer.datashow.util.IPUtil;
 
 public class DataServiceProxy extends HttpServlet {
 
@@ -23,7 +27,7 @@ public class DataServiceProxy extends HttpServlet {
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		System.out.println(req.getRemoteAddr());
+		System.out.println(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()) + " ip : " + IPUtil.getIpAddr(req));
 		java.net.URL url = new java.net.URL(DATA_SERVICE_GETCONFIG + req.getQueryString());
 		InputStream is = url.openStream();
 		BufferedReader buffer = new BufferedReader(new InputStreamReader(is));
