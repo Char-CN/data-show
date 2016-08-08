@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<!-- <link href="css/jquery.dataTables.min.css" rel="stylesheet"> -->
+<!-- <link href="css/dataTables.foundation.min.css" rel="stylesheet"> -->
+<!-- <link href="css/dataTables.material.min.css" rel="stylesheet"> -->
+<script src="js/jquery.min.js"></script>
+<script src="js/echarts.min.js"></script>
+<!-- <script src="js/dataTables.foundation.min.js"></script> -->
+<!-- <script src="js/dataTables.material.min.js"></script> -->
+<style>
+</style>
+<script>
+
+	window.onload = function() {
+
+		var div = $("<div id='div1'>");
+		var div2 = $('<div id="div2" style="float:left">');
+		var div3 = $('<div id="div3" style="float:left">');
+		var div4 = $('<div id="div4" style="float:left">');
+		var div5 = $('<div id="div5" style="float:left">');
+		$("body").append(div);
+		$("body").append(div2);
+		$("body").append(div3);
+		$("body").append(div4);
+		$("body").append(div5);
+		var width = $(window).width();
+		var height = $(window).height();
+
+		$("#div1").width(width);
+		$("#div1").height(height/2);
+		myChart = echarts.init($("#div1")[0]);
+		
+		$("#div2").width(width/6.1);
+		$("#div2").height(height/2);
+		myChart2 = echarts.init($("#div2")[0]);
+		
+		$("#div3").width(width/8.1);
+		$("#div3").height(height/2);
+		myChart3 = echarts.init($("#div3")[0]);
+		
+		$("#div4").width(width/2.1);
+		$("#div4").height(height/2);
+		myChart4 = echarts.init($("#div4")[0]);
+		
+		$("#div5").width(width/5.1);
+		$("#div5").height(height/2);
+		myChart5 = echarts.init($("#div5")[0]);
+		
+		option = {
+			title: {
+        	    text: '实时交易数据'
+        	},
+			label : {
+				normal : {
+					show : true,
+					position : 'top'
+				}
+			},
+			tooltip : {
+				trigger : 'axis',
+				axisPointer : { // 坐标轴指示器，坐标轴触发有效
+					type : 'shadow' // 默认为直线，可选为：'line' | 'shadow'
+				}
+			},
+			legend : {
+				data : [ '昨天金额', '今天金额', '昨天人数', '今天人数' ]
+			},
+			grid : {
+				left : '2%',
+				right : '4%',
+				bottom : '2%',
+				containLabel : true
+			},
+			xAxis : [ {
+				splitLine:{
+					show: false
+				},
+				type : 'category',
+				data : [ '0-1', '1-2', '2-3', '3-4', '4-5', '5-6', '6-7', '7-8', '8-9', '9-10', '10-11'
+				         , '11-12', '12-13', '13-14', '14-15', '15-16', '16-17', '17-18', '18-19', '19-20', '20-21'
+				         , '21-22', '22-23', '23-24']
+			} ],
+			yAxis : [ {
+				splitLine:{
+					show: false
+				},
+				type : 'value'
+			} ],
+			series : [ {
+				name : '昨天人数',
+				type : 'bar',
+				data : [ 120, 132, 101, 134, 90, 230, 210, 120, 132, 101, 134, 90, 230, 210 ,120, 132, 101, 134, 90, 230, 210 , 120, 132, 101 ]
+			}, {
+				name : '今天人数',
+				type : 'bar',
+				data : [ 220, 182, 191, 234, 290, 330, 310,220, 182, 191, 234, 290, 330, 310,220, 182, 191, 234, 290, 330, 310,220, 182, 191 ]
+			}, {
+				name : '昨天金额',
+				type : 'line',
+				data : [ 520, 532, 501, 534, 590, 530, 520 ,520, 532, 501, 534, 590, 530, 520 ,520, 532, 501, 534, 590, 530, 520 ,520, 532, 501]
+			}, {
+				name : '今天金额',
+				type : 'line',
+				data : [ 420, 282, 391, 434, 490, 530, 510,420, 282, 391, 434, 490, 530, 510,420, 282, 391, 434, 490, 530, 510,420, 282, 391 ]
+			}]
+		};
+		myChart.setOption(option);
+
+		myChart2.setOption({
+			title: {
+        	    text: ''
+        	},
+			label : {
+				normal : {
+					show : true,
+					position : 'top'
+				}
+			},
+			tooltip : {
+				trigger : 'axis',
+				axisPointer : { // 坐标轴指示器，坐标轴触发有效
+					type : 'shadow' // 默认为直线，可选为：'line' | 'shadow'
+				}
+			},
+			legend : {
+				data : [ '昨天人数', '今天人数' ]
+			},
+			grid : {
+				left : '2%',
+				right : '4%',
+				bottom : '2%',
+				containLabel : true
+			},
+			xAxis : [ {
+				splitLine:{
+					show: false
+				},
+				type : 'category',
+				data : [ '0-1', '1-2', '2-3']
+			} ],
+			yAxis : [ {
+				splitLine:{
+					show: false
+				},
+				type : 'value'
+			} ],
+			series : [ {
+				name : '昨天人数',
+				type : 'bar',
+				data : [ 120, 132, 101 ]
+			}, {
+				name : '今天人数',
+				type : 'bar',
+				data : [ 220, 182, 191]
+			}]
+		});
+		myChart3.setOption({
+			title: {
+        	    text: ''
+        	},
+			label : {
+				normal : {
+					show : true,
+					position : 'top'
+				}
+			},
+			tooltip : {
+				trigger : 'axis',
+				axisPointer : { // 坐标轴指示器，坐标轴触发有效
+					type : 'shadow' // 默认为直线，可选为：'line' | 'shadow'
+				}
+			},
+			legend : {
+				data : [ '昨天人数' ]
+			},
+			grid : {
+				left : '2%',
+				right : '4%',
+				bottom : '2%',
+				containLabel : true
+			},
+			xAxis : [ {
+				splitLine:{
+					show: false
+				},
+				type : 'category',
+				data : [ '0-1', '1-2', '2-3']
+			} ],
+			yAxis : [ {
+				splitLine:{
+					show: false
+				},
+				type : 'value'
+			} ],
+			series : [ {
+				name : '昨天人数',
+				type : 'bar',
+				data : [ 120, 132, 101 ]
+			}]
+		});
+		myChart4.setOption({
+			title: {
+        	    text: ''
+        	},
+			label : {
+				normal : {
+					show : true,
+					position : 'top'
+				}
+			},
+			tooltip : {
+				trigger : 'axis',
+				axisPointer : { // 坐标轴指示器，坐标轴触发有效
+					type : 'shadow' // 默认为直线，可选为：'line' | 'shadow'
+				}
+			},
+			legend : {
+				data : [ '昨天金额', '今天金额', '昨天人数', '今天人数' ]
+			},
+			grid : {
+				left : '2%',
+				right : '4%',
+				bottom : '2%',
+				containLabel : true
+			},
+			xAxis : [ {
+				splitLine:{
+					show: false
+				},
+				type : 'category',
+				data : [ '1' ,'2','3','4','5','6','7','8','9','10','11','12','13','14']
+			} ],
+			yAxis : [ {
+				splitLine:{
+					show: false
+				},
+				type : 'value'
+			} ],
+			series : [ {
+				name : '昨天人数',
+				type : 'line',
+				data : [ 120, 132, 101, 134, 90, 230, 210, 120, 132, 101, 134, 90, 230, 210  ]
+			}, {
+				name : '今天人数',
+				type : 'line',
+				data : [ 220, 182, 191, 234, 290, 330, 310,220, 182, 191, 234, 290, 330, 310 ]
+			}, {
+				name : '昨天金额',
+				type : 'line',
+				data : [ 520, 532, 501, 534, 590, 530, 520 ,520, 532, 501, 534, 590, 530, 520 ]
+			}, {
+				name : '今天金额',
+				type : 'line',
+				data : [ 420, 282, 391, 434, 490, 530, 510,420, 282, 391, 434, 490, 530, 510 ]
+			}]
+		});
+		myChart5.setOption({
+			title: {
+        	    text: ''
+        	},
+			label : {
+				normal : {
+					show : true,
+					position : 'top'
+				}
+			},
+			tooltip : {
+				trigger : 'axis',
+				axisPointer : { // 坐标轴指示器，坐标轴触发有效
+					type : 'shadow' // 默认为直线，可选为：'line' | 'shadow'
+				}
+			},
+			legend : {
+				data : [ '昨天金额', '今天金额', '昨天人数', '今天人数' ]
+			},
+			grid : {
+				left : '2%',
+				right : '4%',
+				bottom : '2%',
+				containLabel : true
+			},
+			xAxis : [ {
+				splitLine:{
+					show: false
+				},
+				type : 'category',
+				data : [ '1' ,'2','3','4']
+			} ],
+			yAxis : [ {
+				splitLine:{
+					show: false
+				},
+				type : 'value'
+			} ],
+			series : [ {
+				name : '昨天人数',
+				type : 'line',
+				data : [ 120, 132, 101, 134 ]
+			}, {
+				name : '今天人数',
+				type : 'line',
+				data : [ 220, 182, 191, 234 ]
+			}, {
+				name : '昨天金额',
+				type : 'line',
+				data : [ 520, 532, 501, 534 ]
+			}, {
+				name : '今天金额',
+				type : 'line',
+				data : [ 420, 282, 391, 434]
+			}]
+		});
+		
+		setTimeout("refer()", 2000);
+	};
+
+	var refer = function() {
+		option.series = [{
+			name : '昨天人数',
+			type : 'bar',
+			data : [ 120, 132, 101, 134, 90, 230, 210, 120, 132, 101, 134, 90, 230, 210 ,120, 132, 101, 134, 90, 230, 210 , 120, 132, 201 ]
+		}, {
+			name : '今天人数',
+			type : 'bar',
+			data : [ 220, 182, 191, 234, 290, 330, 310,220, 182, 191, 234, 290, 330, 310,220, 182, 191, 234, 290, 330, 310,220, 182, 291 ]
+		}, {
+			name : '昨天金额',
+			type : 'line',
+			data : [ 520, 532, 501, 534, 590, 530, 520 ,520, 532, 501, 534, 590, 530, 520 ,520, 532, 501, 534, 590, 530, 520 ,520, 532, 601]
+		}, {
+			name : '今天金额',
+			type : 'line',
+			data : [ 420, 282, 391, 434, 490, 530, 510,420, 282, 391, 434, 490, 530, 510,420, 282, 391, 434, 490, 530, 510,420, 282, 491 ]
+		}];
+		myChart.setOption(option);
+	};
+	
+</script>
+</head>
+<body>
+</body>
+</html>

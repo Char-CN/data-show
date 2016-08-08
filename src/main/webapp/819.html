@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link href="css/jquery.dataTables.min.css" rel="stylesheet">
+<!-- <link href="css/dataTables.foundation.min.css" rel="stylesheet"> -->
+<!-- <link href="css/dataTables.material.min.css" rel="stylesheet"> -->
+<script src="js/jquery.min.js"></script>
+<script src="js/jquery.dataTables.min.js"></script>
+<!-- <script src="js/dataTables.foundation.min.js"></script> -->
+<!-- <script src="js/dataTables.material.min.js"></script> -->
+<style>
+div {
+/* 	border: 1px solid red */
+}
+div#row_1 {
+	width: 100%;
+}
+
+div#row_2 {
+	width: 100%;
+}
+
+table#tb1 {
+	width: 100%
+}
+</style>
+<script>
+	window.onload = function() {
+		var width = $(window).width();
+		var height = $(window).height();
+		table = $('#tb1').DataTable({
+			bAutoWidth : false,
+			scrollX : true,
+			scrollCollapse : true,
+			scroller : true,
+			paging : false,
+			"searching" : false,
+			info : false,
+			ordering : false
+		});
+		table = $('#tb2').DataTable({
+			bAutoWidth : false,
+			scrollX : true,
+			scrollCollapse : true,
+			scroller : true,
+			paging : false,
+			"searching" : false,
+			info : false,
+			ordering : false
+		});
+		table = $('#tb3').DataTable({
+			bAutoWidth : false,
+			scrollX : true,
+			scrollCollapse : true,
+			scroller : true,
+			paging : false,
+			"searching" : false,
+			info : false,
+			ordering : false
+		});
+	};
+</script>
+</head>
+<body>
+	<div id="row_1" style=";">
+		<div style="width: 25%;">
+			<table id="tb1" class="stripe row-border order-column cell-border">
+				<thead>
+		            <tr class="gray" style="cell-border">
+		            	<th>日期</th>
+		            	<th>交易人数</th>
+		            	<th>交易金额</th>
+		            </tr>
+	            </thead>
+	            <tbody>
+	            	<tr>
+	            		<td>08-08</td>
+	            		<td>22222</td>
+	            		<td>333333333333</td>
+	            	</tr>
+	            	<tr>
+	            		<td>08-08</td>
+	            		<td>22222</td>
+	            		<td>333333333333</td>
+	            	</tr>
+	            	<tr>
+	            		<td>08-08</td>
+	            		<td>22222</td>
+	            		<td>333333333333</td>
+	            	</tr>
+	            	<tr>
+	            		<td>08-08</td>
+	            		<td>22222</td>
+	            		<td>333333333333</td>
+	            	</tr>
+	            	<tr>
+	            		<td>08-08</td>
+	            		<td>22222</td>
+	            		<td>333333333333</td>
+	            	</tr>
+	            	<tr>
+	            		<td>08-08</td>
+	            		<td>22222</td>
+	            		<td>333333333333</td>
+	            	</tr>
+	            	<tr>
+	            		<td>08-08</td>
+	            		<td>22222</td>
+	            		<td>333333333333</td>
+	            	</tr>
+	            	<tr>
+	            		<td>08-08</td>
+	            		<td>22222</td>
+	            		<td>333333333333</td>
+	            	</tr>
+	            	<tr>
+	            		<td>08-08</td>
+	            		<td>22222</td>
+	            		<td>333333333333</td>
+	            	</tr>
+	            	<tr>
+	            		<td>08-08</td>
+	            		<td>22222</td>
+	            		<td>333333333333</td>
+	            	</tr>
+	            	<tr>
+	            		<td>08-08</td>
+	            		<td>22222</td>
+	            		<td>333333333333</td>
+	            	</tr>
+	            	<tr>
+	            		<td>08-08</td>
+	            		<td>22222</td>
+	            		<td>333333333333</td>
+	            	</tr>
+	            	<tr>
+	            		<td>08-08</td>
+	            		<td>22222</td>
+	            		<td>333333333333</td>
+	            	</tr>
+	            	<tr>
+	            		<td>08-08</td>
+	            		<td>22222</td>
+	            		<td>333333333333</td>
+	            	</tr>
+	            	<tr>
+	            		<td>08-08</td>
+	            		<td>22222</td>
+	            		<td>333333333333</td>
+	            	</tr>
+	            </tbody>
+			</table>
+		</div>
+	</div>
+	<div id="row_2" style="margin-top: 30px;">
+		<div style="width: 100%;">
+			<table id="tb2" class="stripe row-border order-column cell-border">
+				<thead>
+		            <tr class="gray" style="cell-border">
+		                <th rowspan="2" >日期</th>
+		                <th colspan="2">参与条件一<br>累计交易额满3万</th>
+		                <th colspan="4">参与条件二<br>推荐3个交易用户</th>
+		                <th colspan="2">满足条件一人数</th>
+		            </tr>
+		            <tr>
+		                <th>111</th>
+		                <th>222</th>
+		                <th>333</th>
+		                <th>444</th>
+		                <th>555</th>
+		                <th>666</th>
+		                <th>777</th>
+		                <th>888</th>
+		            </tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>08-01</td>
+						<td>123123</td>
+						<td>12312312312</td>
+						<td>123123</td>
+						<td>123123</td>
+						<td>123123</td>
+						<td>123123</td>
+						<td>123123</td>
+						<td>123123</td>
+					</tr>
+					<tr>
+						<td>08-01</td>
+						<td>123123</td>
+						<td>12312312312</td>
+						<td>123123</td>
+						<td>123123</td>
+						<td>123123</td>
+						<td>123123</td>
+						<td>123123</td>
+						<td>123123</td>
+					</tr>
+					<tr>
+						<td>08-01</td>
+						<td>123123</td>
+						<td>12312312312</td>
+						<td>123123</td>
+						<td>123123</td>
+						<td>123123</td>
+						<td>123123</td>
+						<td>123123</td>
+						<td>123123</td>
+					</tr>
+					<tr>
+						<td>08-01</td>
+						<td>123123</td>
+						<td>12312312312</td>
+						<td>123123</td>
+						<td>123123</td>
+						<td>123123</td>
+						<td>123123</td>
+						<td>123123</td>
+						<td>123123</td>
+					</tr>
+					<tr>
+						<td>08-01</td>
+						<td>123123</td>
+						<td>12312312312</td>
+						<td>123123</td>
+						<td>123123</td>
+						<td>123123</td>
+						<td>123123</td>
+						<td>123123</td>
+						<td>123123</td>
+					</tr>
+					<tr>
+						<td>08-01</td>
+						<td>123123</td>
+						<td>12312312312</td>
+						<td>123123</td>
+						<td>123123</td>
+						<td>123123</td>
+						<td>123123</td>
+						<td>123123</td>
+						<td>123123</td>
+					</tr>
+					<tr>
+						<td>08-01</td>
+						<td>123123</td>
+						<td>12312312312</td>
+						<td>123123</td>
+						<td>123123</td>
+						<td>123123</td>
+						<td>123123</td>
+						<td>123123</td>
+						<td>123123</td>
+					</tr>
+					<tr>
+						<td>08-01</td>
+						<td>123123</td>
+						<td>12312312312</td>
+						<td>123123</td>
+						<td>123123</td>
+						<td>123123</td>
+						<td>123123</td>
+						<td>123123</td>
+						<td>123123</td>
+					</tr>
+					<tr>
+						<td>08-01</td>
+						<td>123123</td>
+						<td>12312312312</td>
+						<td>123123</td>
+						<td>123123</td>
+						<td>123123</td>
+						<td>123123</td>
+						<td>123123</td>
+						<td>123123</td>
+					</tr>
+					<tr>
+						<td>08-01</td>
+						<td>123123</td>
+						<td>12312312312</td>
+						<td>123123</td>
+						<td>123123</td>
+						<td>123123</td>
+						<td>123123</td>
+						<td>123123</td>
+						<td>123123</td>
+					</tr>
+					<tr>
+						<td>08-01</td>
+						<td>123123</td>
+						<td>12312312312</td>
+						<td>123123</td>
+						<td>123123</td>
+						<td>123123</td>
+						<td>123123</td>
+						<td>123123</td>
+						<td>123123</td>
+					</tr>
+					<tr>
+						<td>08-01</td>
+						<td>123123</td>
+						<td>12312312312</td>
+						<td>123123</td>
+						<td>123123</td>
+						<td>123123</td>
+						<td>123123</td>
+						<td>123123</td>
+						<td>123123</td>
+					</tr>
+					<tr>
+						<td>08-01</td>
+						<td>123123</td>
+						<td>12312312312</td>
+						<td>123123</td>
+						<td>123123</td>
+						<td>123123</td>
+						<td>123123</td>
+						<td>123123</td>
+						<td>123123</td>
+					</tr>
+					<tr>
+						<td>08-01</td>
+						<td>123123</td>
+						<td>12312312312</td>
+						<td>123123</td>
+						<td>123123</td>
+						<td>123123</td>
+						<td>123123</td>
+						<td>123123</td>
+						<td>123123</td>
+					</tr>
+					<tr>
+						<td>08-01</td>
+						<td>123123</td>
+						<td>12312312312</td>
+						<td>123123</td>
+						<td>123123</td>
+						<td>123123</td>
+						<td>123123</td>
+						<td>123123</td>
+						<td>123123</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<div id="row_3" style="margin-top: 30px;">
+		<div style="width: 60%;">
+			<table id="tb3" class="stripe row-border order-column cell-border">
+				<thead>
+		            <tr class="gray" style="cell-border">
+		                <th rowspan="2" >日期</th>
+		                <th colspan="2">收益翻倍项目</th>
+		                <th colspan="2">2万元新手标交易数据</th>
+		                <th colspan="2">秒杀产品交易数据</th>
+		            </tr>
+		            <tr>
+		                <th>交易人数</th>
+		                <th>交易金额</th>
+		                <th>交易人数</th>
+		                <th>交易金额</th>
+		                <th>交易人数</th>
+		                <th>交易金额</th>
+		            </tr>
+	            </thead>
+	            <tbody>
+					<tr>
+						<td>08-01</td>
+						<td>123123</td>
+						<td>12312312312</td>
+						<td>123123</td>
+						<td>12312312312</td>
+						<td>123123</td>
+						<td>12312312312</td>
+					</tr>
+					<tr>
+						<td>08-01</td>
+						<td>123123</td>
+						<td>12312312312</td>
+						<td>123123</td>
+						<td>12312312312</td>
+						<td>123123</td>
+						<td>12312312312</td>
+					</tr>
+					<tr>
+						<td>08-01</td>
+						<td>123123</td>
+						<td>12312312312</td>
+						<td>123123</td>
+						<td>12312312312</td>
+						<td>123123</td>
+						<td>12312312312</td>
+					</tr>
+					<tr>
+						<td>08-01</td>
+						<td>123123</td>
+						<td>12312312312</td>
+						<td>123123</td>
+						<td>12312312312</td>
+						<td>123123</td>
+						<td>12312312312</td>
+					</tr>
+					<tr>
+						<td>08-01</td>
+						<td>123123</td>
+						<td>12312312312</td>
+						<td>123123</td>
+						<td>12312312312</td>
+						<td>123123</td>
+						<td>12312312312</td>
+					</tr>
+	            </tbody>
+			</table>
+		</div>
+	</div>
+</body>
+</html>
