@@ -8,51 +8,84 @@
 <!-- <link href="css/dataTables.material.min.css" rel="stylesheet"> -->
 <script src="js/jquery.min.js"></script>
 <script src="js/echarts.min.js"></script>
+<script src="js/xdate.dev.min.js"></script>
+<script src="js/commons.js"></script>
 <!-- <script src="js/dataTables.foundation.min.js"></script> -->
 <!-- <script src="js/dataTables.material.min.js"></script> -->
 <style>
+div {
+	float: left;
+	/* 	border: 1px solid red; */
+}
 </style>
 <script>
-
+	var lock1 = false;
+	var lock2 = false;
+	var lock3 = false;
+	var lock4 = false;
 	window.onload = function() {
-
-		var div = $("<div id='div1'>");
-		var div2 = $('<div id="div2" style="float:left">');
-		var div3 = $('<div id="div3" style="float:left">');
-		var div4 = $('<div id="div4" style="float:left">');
-		var div5 = $('<div id="div5" style="float:left">');
+		var div = $("<div id='div1' >");
+		var div1_1 = $("<div id='div1_1' >");
+		var blank = $("<div id='blank' ></div>");
+		var div2 = $('<div id="div2" >');
+		var div2_1 = $("<div id='div2_1' >");
+		var div3 = $('<div id="div3" >');
+		var div2_2 = $("<div id='div2_2' >");
+		var div4 = $('<div id="div4" >');
+		var div2_3 = $("<div id='div2_3' >");
+		var div5 = $('<div id="div5" >');
 		$("body").append(div);
+		$("body").append(div1_1);
+		$("body").append(blank);
 		$("body").append(div2);
+		$("body").append(div2_1);
 		$("body").append(div3);
+		$("body").append(div2_2);
 		$("body").append(div4);
+		$("body").append(div2_3);
 		$("body").append(div5);
 		var width = $(window).width();
 		var height = $(window).height();
 
-		$("#div1").width(width);
-		$("#div1").height(height/2);
+		$("#div1").width(width * 0.8);
+		$("#div1").height(height / 2.2);
 		myChart = echarts.init($("#div1")[0]);
-		
-		$("#div2").width(width/6.1);
-		$("#div2").height(height/2);
+
+		$("#div1_1").width(width * 0.18);
+		$("#div1_1").height(height / 2.2);
+
+		$("#div2_1").width(width * 0.05);
+		$("#div2_1").height(height / 2.5);
+
+		$("#div2_2").width(width * 0.05);
+		$("#div2_2").height(height / 2.5);
+
+		$("#div2_3").width(width * 0.05);
+		$("#div2_3").height(height / 2.5);
+
+		$("#blank").width(width);
+		$("#blank").height(height / 10);
+
+		$("#div2").width(width / 9.1);
+		$("#div2").height(height / 2.5);
 		myChart2 = echarts.init($("#div2")[0]);
-		
-		$("#div3").width(width/8.1);
-		$("#div3").height(height/2);
+
+		$("#div3").width(width / 5.5);
+		$("#div3").height(height / 2.5);
 		myChart3 = echarts.init($("#div3")[0]);
-		
-		$("#div4").width(width/2.1);
-		$("#div4").height(height/2);
+
+		$("#div4").width(width / 2.905);
+		$("#div4").height(height / 2.5);
 		myChart4 = echarts.init($("#div4")[0]);
-		
-		$("#div5").width(width/5.1);
-		$("#div5").height(height/2);
+
+		$("#div5").width(width / 5.1);
+		$("#div5").height(height / 2.5);
 		myChart5 = echarts.init($("#div5")[0]);
-		
-		option = {
-			title: {
-        	    text: '实时交易数据'
-        	},
+
+		myChart.setOption({
+			title : {
+				text : '实时交易数据'
+			},
 			label : {
 				normal : {
 					show : true,
@@ -75,44 +108,44 @@
 				containLabel : true
 			},
 			xAxis : [ {
-				splitLine:{
-					show: false
+				splitLine : {
+					show : false
 				},
 				type : 'category',
-				data : [ '0-1', '1-2', '2-3', '3-4', '4-5', '5-6', '6-7', '7-8', '8-9', '9-10', '10-11'
-				         , '11-12', '12-13', '13-14', '14-15', '15-16', '16-17', '17-18', '18-19', '19-20', '20-21'
-				         , '21-22', '22-23', '23-24']
+				data : [ '0时', '1时', '2时', '3时', '4时', '5时', '6时', '7时', '8时', '9时', '10时', '11时', '12时', '13时', '14时', '15时', '16时', '17时', '18时', '19时',
+						'20时', '21时', '22时', '23时' ]
+			// 				data : [ '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23' ]
 			} ],
 			yAxis : [ {
-				splitLine:{
-					show: false
+				splitLine : {
+					show : false
 				},
 				type : 'value'
-			} ],
-			series : [ {
-				name : '昨天人数',
-				type : 'bar',
-				data : [ 120, 132, 101, 134, 90, 230, 210, 120, 132, 101, 134, 90, 230, 210 ,120, 132, 101, 134, 90, 230, 210 , 120, 132, 101 ]
-			}, {
-				name : '今天人数',
-				type : 'bar',
-				data : [ 220, 182, 191, 234, 290, 330, 310,220, 182, 191, 234, 290, 330, 310,220, 182, 191, 234, 290, 330, 310,220, 182, 191 ]
-			}, {
-				name : '昨天金额',
-				type : 'line',
-				data : [ 520, 532, 501, 534, 590, 530, 520 ,520, 532, 501, 534, 590, 530, 520 ,520, 532, 501, 534, 590, 530, 520 ,520, 532, 501]
-			}, {
-				name : '今天金额',
-				type : 'line',
-				data : [ 420, 282, 391, 434, 490, 530, 510,420, 282, 391, 434, 490, 530, 510,420, 282, 391, 434, 490, 530, 510,420, 282, 391 ]
-			}]
-		};
-		myChart.setOption(option);
+			} ]
+// 			,
+// 			series : [ {
+// 				name : '昨天人数',
+// 				type : 'bar',
+// 				data : [ 120, 132, 101, 134, 90, 230, 210, 120, 132, 101, 134, 90, 230, 210, 120, 132, 101, 134, 90, 230, 210, 120, 132, 101 ]
+// 			}, {
+// 				name : '今天人数',
+// 				type : 'bar',
+// 				data : [ 220, 182, 191, 234, 290, 330, 310, 220, 182, 191, 234, 290, 330, 310, 220, 182, 191, 234, 290, 330, 310, 220, 182, 191 ]
+// 			}, {
+// 				name : '昨天金额',
+// 				type : 'line',
+// 				data : [ 520, 532, 501, 534, 590, 530, 520, 520, 532, 501, 534, 590, 530, 520, 520, 532, 501, 534, 590, 530, 520, 520, 532, 501 ]
+// 			}, {
+// 				name : '今天金额',
+// 				type : 'line',
+// 				data : [ 420, 282, 391, 434, 490, 530, 510, 420, 282, 391, 434, 490, 530, 510, 420, 282, 391, 434, 490, 530, 510, 420, 282, 391 ]
+// 			} ]
+		});
 
 		myChart2.setOption({
-			title: {
-        	    text: ''
-        	},
+			title : {
+				text : '累计交易满3万的用户数'
+			},
 			label : {
 				normal : {
 					show : true,
@@ -126,7 +159,7 @@
 				}
 			},
 			legend : {
-				data : [ '昨天人数', '今天人数' ]
+				data : [ '人数' ]
 			},
 			grid : {
 				left : '2%',
@@ -135,32 +168,29 @@
 				containLabel : true
 			},
 			xAxis : [ {
-				splitLine:{
-					show: false
+				splitLine : {
+					show : false
 				},
 				type : 'category',
-				data : [ '0-1', '1-2', '2-3']
+				data : [ '累计', '今天', '昨天' ]
 			} ],
 			yAxis : [ {
-				splitLine:{
-					show: false
+				splitLine : {
+					show : false
 				},
 				type : 'value'
-			} ],
-			series : [ {
-				name : '昨天人数',
-				type : 'bar',
-				data : [ 120, 132, 101 ]
-			}, {
-				name : '今天人数',
-				type : 'bar',
-				data : [ 220, 182, 191]
-			}]
+			} ]
+// 			,
+// 			series : [ {
+// 				name : '人数',
+// 				type : 'bar',
+// 				data : [ 120, 132, 101 ]
+// 			} ]
 		});
 		myChart3.setOption({
-			title: {
-        	    text: ''
-        	},
+			title : {
+				text : '推荐3个好友并交易的用户数'
+			},
 			label : {
 				normal : {
 					show : true,
@@ -174,7 +204,7 @@
 				}
 			},
 			legend : {
-				data : [ '昨天人数' ]
+				data : [ '人数' ]
 			},
 			grid : {
 				left : '2%',
@@ -183,28 +213,29 @@
 				containLabel : true
 			},
 			xAxis : [ {
-				splitLine:{
-					show: false
+				splitLine : {
+					show : false
 				},
 				type : 'category',
-				data : [ '0-1', '1-2', '2-3']
+				data : [ '1个', '2个', '3个以上' ]
 			} ],
 			yAxis : [ {
-				splitLine:{
-					show: false
+				splitLine : {
+					show : false
 				},
 				type : 'value'
-			} ],
-			series : [ {
-				name : '昨天人数',
-				type : 'bar',
-				data : [ 120, 132, 101 ]
-			}]
+			} ]
+// 			,
+// 			series : [ {
+// 				name : '人数',
+// 				type : 'bar',
+// 				data : [ 120, 132, 101 ]
+// 			} ]
 		});
 		myChart4.setOption({
-			title: {
-        	    text: ''
-        	},
+			title : {
+				text : '2万元新手产品销售分析'
+			},
 			label : {
 				normal : {
 					show : true,
@@ -218,7 +249,7 @@
 				}
 			},
 			legend : {
-				data : [ '昨天金额', '今天金额', '昨天人数', '今天人数' ]
+				data : [ '今天金额', '今天人数' ]
 			},
 			grid : {
 				left : '2%',
@@ -227,40 +258,35 @@
 				containLabel : true
 			},
 			xAxis : [ {
-				splitLine:{
-					show: false
+				splitLine : {
+					show : false
 				},
 				type : 'category',
-				data : [ '1' ,'2','3','4','5','6','7','8','9','10','11','12','13','14']
+				data : [ '8日', '9日', '10日', '11日', '12日', '13日', '14日', '15日', '16日', '17日', '18日', '19日', '20日', '21日' ]
+			// 				data : [ '8-8', '8-9', '8-10', '8-11', '8-12', '8-13', '8-14', '8-15', '8-16', '8-17', '8-18', '8-19', '8-20', '8-21' ]
 			} ],
 			yAxis : [ {
-				splitLine:{
-					show: false
+				splitLine : {
+					show : false
 				},
 				type : 'value'
-			} ],
-			series : [ {
-				name : '昨天人数',
-				type : 'line',
-				data : [ 120, 132, 101, 134, 90, 230, 210, 120, 132, 101, 134, 90, 230, 210  ]
-			}, {
+			} ]
+			,
+			series : [{
 				name : '今天人数',
-				type : 'line',
-				data : [ 220, 182, 191, 234, 290, 330, 310,220, 182, 191, 234, 290, 330, 310 ]
-			}, {
-				name : '昨天金额',
-				type : 'line',
-				data : [ 520, 532, 501, 534, 590, 530, 520 ,520, 532, 501, 534, 590, 530, 520 ]
-			}, {
+				type : 'bar',
+				data : [ 220, 182, 191, 234, 290, 330, 310, 220, 182, 191, 234, 290, 330, 310 ]
+			},{
 				name : '今天金额',
 				type : 'line',
-				data : [ 420, 282, 391, 434, 490, 530, 510,420, 282, 391, 434, 490, 530, 510 ]
-			}]
+				smooth : true,
+				data : [ 420, 282, 391, 434, 490, 530, 510, 420, 282, 391, 434, 490, 530, 510 ]
+			} ]
 		});
 		myChart5.setOption({
-			title: {
-        	    text: ''
-        	},
+			title : {
+				text : '翻倍产品销售分析'
+			},
 			label : {
 				normal : {
 					show : true,
@@ -274,7 +300,7 @@
 				}
 			},
 			legend : {
-				data : [ '昨天金额', '今天金额', '昨天人数', '今天人数' ]
+				data : [ '今天金额', '今天人数' ]
 			},
 			grid : {
 				left : '2%',
@@ -283,61 +309,285 @@
 				containLabel : true
 			},
 			xAxis : [ {
-				splitLine:{
-					show: false
+				splitLine : {
+					show : false
 				},
 				type : 'category',
-				data : [ '1' ,'2','3','4']
+				data : [ '18日', '19日', '20日', '21日' ]
 			} ],
 			yAxis : [ {
-				splitLine:{
-					show: false
+				splitLine : {
+					show : false
 				},
 				type : 'value'
-			} ],
-			series : [ {
-				name : '昨天人数',
-				type : 'line',
-				data : [ 120, 132, 101, 134 ]
-			}, {
+			} ]
+			,
+			series : [{
 				name : '今天人数',
-				type : 'line',
+				type : 'bar',
 				data : [ 220, 182, 191, 234 ]
-			}, {
-				name : '昨天金额',
-				type : 'line',
-				data : [ 520, 532, 501, 534 ]
 			}, {
 				name : '今天金额',
 				type : 'line',
-				data : [ 420, 282, 391, 434]
-			}]
+				smooth : true,
+				data : [ 420, 282, 391, 434 ]
+			} ]
 		});
-		
-		setTimeout("refer()", 2000);
+
+		referData1();
+		setInterval("referData1()", 2000);
+		referData2();
+		setInterval("referData2()", 2000);
+		referData3();
+		setInterval("referData3()", 2000);
+		referData4();
+		setInterval("referData4()", 2000);
+		referData5();
+		setInterval("referData5()", 2000);
 	};
 
-	var refer = function() {
-		option.series = [{
-			name : '昨天人数',
-			type : 'bar',
-			data : [ 120, 132, 101, 134, 90, 230, 210, 120, 132, 101, 134, 90, 230, 210 ,120, 132, 101, 134, 90, 230, 210 , 120, 132, 201 ]
-		}, {
-			name : '今天人数',
-			type : 'bar',
-			data : [ 220, 182, 191, 234, 290, 330, 310,220, 182, 191, 234, 290, 330, 310,220, 182, 191, 234, 290, 330, 310,220, 182, 291 ]
-		}, {
-			name : '昨天金额',
-			type : 'line',
-			data : [ 520, 532, 501, 534, 590, 530, 520 ,520, 532, 501, 534, 590, 530, 520 ,520, 532, 501, 534, 590, 530, 520 ,520, 532, 601]
-		}, {
-			name : '今天金额',
-			type : 'line',
-			data : [ 420, 282, 391, 434, 490, 530, 510,420, 282, 391, 434, 490, 530, 510,420, 282, 391, 434, 490, 530, 510,420, 282, 491 ]
-		}];
-		myChart.setOption(option);
+	var referData1 = function() {
+		if (lock1) {
+			return;
+		}
+		lock1 = true;
+		t1 = new XDate().toString("yyyy-MM-dd");
+		var qeuryString = "";
+		qeuryString += "id=10";
+		qeuryString += "&today=" + new XDate(t1).toString("yyyyMMdd");
+		qeuryString += "&yesterday=" + new XDate(t1).addDays(-1).toString("yyyyMMdd");
+		qeuryString += "&yesterday2=" + new XDate(t1).addDays(-2).toString("yyyyMMdd");
+		$.ajax({
+			type : "get",
+			url : $util.data_service_getconfig + qeuryString,
+			dataType : "json",
+			timeout : 500,
+			success : function(data) {
+				try {
+					var rst = eval(data);
+					var values = rst.details.today_hour.values;
+					var yesterday_values = rst.details.yesterday_hour.values;
+					var today_pepole_count = [];
+					var today_money = [];
+					var yesterday_pepole_count = [];
+					var yesterday_money = [];
+					for ( var i in values) {
+						if (values[i].deal_count == 0 && values[i].deal_amount == 0) {
+							today_pepole_count.push(null);
+							today_money.push(null);
+						} else {
+							today_pepole_count.push(values[i].deal_count);
+							today_money.push(values[i].deal_amount);
+						}
+					}
+					for ( var i in yesterday_values) {
+						yesterday_pepole_count.push(yesterday_values[i].deal_count);
+						yesterday_money.push(yesterday_values[i].deal_amount);
+					}
+					var option = myChart.getOption();
+					option.series = [ {
+						name : '昨天人数',
+						type : 'bar',
+						data : yesterday_pepole_count
+					}, {
+						name : '今天人数',
+						type : 'bar',
+						data : today_pepole_count
+					}, {
+						name : '昨天金额',
+						type : 'line',
+						smooth : true,
+						data : yesterday_money
+					}, {
+						name : '今天金额',
+						type : 'line',
+						smooth : true,
+						data : today_money
+					} ];
+					myChart.setOption(option);
+				} catch (e) {
+				}
+				lock1 = false;
+			},
+			error : function(e) {
+				lock1 = false;
+			}
+		});
 	};
 	
+	var referData2 = function() {
+		if (lock2) {
+			return;
+		}
+		lock2 = true;
+		t1 = new XDate().toString("yyyy-MM-dd");
+		var qeuryString = "";
+		qeuryString += "id=21";
+		qeuryString += "&today=" + new XDate(t1).toString("yyyyMMdd");
+		qeuryString += "&yesterday=" + new XDate(t1).addDays(-1).toString("yyyyMMdd");
+		$.ajax({
+			type : "get",
+			url : $util.data_service_getconfig + qeuryString,
+			dataType : "json",
+			timeout : 500,
+			success : function(data) {
+				try {
+					var rst = eval(data);
+					var option = myChart2.getOption();
+					option.series = [ {
+						name : '人数',
+						type : 'bar',
+						data : [ rst.details.total.values[0].order_nums, rst.details.today.values[0].order_nums, rst.details.yesterday.values[0].order_nums ]
+					} ];
+					myChart2.setOption(option);
+				} catch (e) {
+				}
+				lock2 = false;
+			},
+			error : function(e) {
+				lock2 = false;
+			}
+		});
+	};
+
+	var referData3 = function() {
+		if (lock3) {
+			return;
+		}
+		lock3 = true;
+		t1 = new XDate().toString("yyyy-MM-dd");
+		var qeuryString = "";
+		qeuryString += "id=22";
+		qeuryString += "&today=" + new XDate(t1).toString("yyyyMMdd");
+		qeuryString += "&yesterday=" + new XDate(t1).addDays(-1).toString("yyyyMMdd");
+		$.ajax({
+			type : "get",
+			url : $util.data_service_getconfig + qeuryString,
+			dataType : "json",
+			timeout : 500,
+			success : function(data) {
+				try {
+					var rst = eval(data);
+					var option = myChart3.getOption();
+					option.series = [ {
+						name : '人数',
+						type : 'bar',
+						data : [ rst.details.today.values[0].one_nums , rst.details.today.values[0].two_nums, rst.details.today.values[0].threeup_nums ]
+					} ];
+					myChart3.setOption(option);
+				} catch (e) {
+				}
+				lock3 = false;
+			},
+			error : function(e) {
+				lock3 = false;
+			}
+		});
+	};
+
+	var referData4 = function() {
+		if (lock4) {
+			return;
+		}
+		lock4 = true;
+		t1 = new XDate().toString("yyyy-MM-dd");
+		var qeuryString = "";
+		qeuryString += "id=23";
+		qeuryString += "&today=" + new XDate(t1).toString("yyyyMMdd");
+		qeuryString += "&yesterday=" + new XDate(t1).addDays(-1).toString("yyyyMMdd");
+		$.ajax({
+			type : "get",
+			url : $util.data_service_getconfig + qeuryString,
+			dataType : "json",
+			timeout : 500,
+			success : function(data) {
+				try {
+					var rst = eval(data);
+					var values = rst.details.today.values;
+					var today_pepole_count = [];
+					var today_money = [];
+					for ( var i in values) {
+						if (values[i].deal_count == 0 && values[i].deal_amount == 0) {
+							today_pepole_count.push(null);
+							today_money.push(null);
+						} else {
+							today_pepole_count.push(values[i].order_nums);
+							today_money.push(values[i].order_values);
+						}
+					}
+					var option = myChart4.getOption();
+					option.series = [{
+						name : '今天人数',
+						type : 'bar',
+						data : today_pepole_count
+					},{
+						name : '今天金额',
+						type : 'line',
+						smooth : true,
+						data : today_money
+					} ];
+					myChart4.setOption(option);
+				} catch (e) {
+				}
+				lock4 = false;
+			},
+			error : function(e) {
+				lock4 = false;
+			}
+		});
+	};
+
+	var referData5 = function() {
+		if (lock5) {
+			return;
+		}
+		lock5 = true;
+		t1 = new XDate().toString("yyyy-MM-dd");
+		var qeuryString = "";
+		qeuryString += "id=24";
+		qeuryString += "&today=" + new XDate(t1).toString("yyyyMMdd");
+		qeuryString += "&yesterday=" + new XDate(t1).addDays(-1).toString("yyyyMMdd");
+		$.ajax({
+			type : "get",
+			url : $util.data_service_getconfig + qeuryString,
+			dataType : "json",
+			timeout : 500,
+			success : function(data) {
+				try {
+					var rst = eval(data);
+					var values = rst.details.today.values;
+					var today_pepole_count = [];
+					var today_money = [];
+					for ( var i in values) {
+						if (values[i].deal_count == 0 && values[i].deal_amount == 0) {
+							today_pepole_count.push(null);
+							today_money.push(null);
+						} else {
+							today_pepole_count.push(values[i].order_nums);
+							today_money.push(values[i].order_values);
+						}
+					}
+					var option = myChart5.getOption();
+					option.series = [{
+						name : '今天人数',
+						type : 'bar',
+						data : today_pepole_count
+					},{
+						name : '今天金额',
+						type : 'line',
+						smooth : true,
+						data : today_money
+					} ];
+					myChart5.setOption(option);
+				} catch (e) {
+				}
+				lock5 = false;
+			},
+			error : function(e) {
+				lock5 = false;
+			}
+		});
+	};
 </script>
 </head>
 <body>
